@@ -1,0 +1,73 @@
+commit1
+git init
+readme
+
+commit2
+setup backend
+-migrations
+-tables:
+
+user:
+id:
+user_type
+
+location:
+id:
+email:
+cell:
+pic:
+
+
+
+ 
+street:
+number:
+lat: 
+long:
+
+panics
+id:
+user_id
+address?
+lat?
+long?
+unit_num?
+note
+creatte_at
+active_at
+resolved_at
+chatId?
+victim_status:
+responder_status:
+
+resolved_panic: reponder and 
+panic_id:
+comment:
+
+
+panic_state:
+created:
+address:
+accepted:
+enroute:
+arrived:
+resolved:
+closed
+
+
+
+
+commit 3
+List Panic-APIs:
+
+
+Today will create db 
+panic, user table
+add user api victim / responder
+add panic api
+toggle tate
+
+
+
+Dependecies
+npm i express body-parser sequelize pg pg-hstore express-handlebars
