@@ -1,13 +1,13 @@
 const user = require('./user');
 // const client = require('./client');
-// const panic = require('./panic');
+const panic = require('./panic');
 // const clientResponder = require('./clientResponder');
 // const panicType = require('./panicType');
 
 module.exports = {
   user,
   // client,
-  // panic,
+  panic,
   // clientResponder,
   // panicType
 };
