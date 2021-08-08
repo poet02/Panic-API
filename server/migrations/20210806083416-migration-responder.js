@@ -1,21 +1,47 @@
 'use strict';
-
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable('ClientResponders', {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
+      },
+      client_id: {
+        allowNull: false,
+        type: Sequelize.UUID
+      },
+      client_responder_name: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      client_responder_email: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      client_responder_password: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      client_responder_cell: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      client_responder_location: {
+        type: Sequelize.STRING
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
+    });
   },
-
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable('ClientResponders');
   }
 };

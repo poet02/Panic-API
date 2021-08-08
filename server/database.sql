@@ -1,4 +1,4 @@
-CREATE DATABASE if not exists aura;
+CREATE DATABASE aura;
 
 --users
 --add extension uuid ossp
