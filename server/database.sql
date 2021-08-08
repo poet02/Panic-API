@@ -1,4 +1,5 @@
 CREATE DATABASE aura;
+DROP DATABASE aura;
 
 --users
 --add extension uuid ossp
