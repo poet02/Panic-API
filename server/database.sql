@@ -16,7 +16,7 @@ CREATE TABLE clients(
 
 CREATE TABLE client_responders(
   client_responder_id UUID DEFAULT uuid_generate_v4(),
-  client_id UUID NOT NULL,
+  client_id UUID NOT NULL, --can be null
   client_responder_name text NOT NULL,
   client_responder_email text NOT NULL UNIQUE,
   client_responder_password text NOT NULL,
@@ -34,6 +34,7 @@ CREATE TABLE users(
   user_email text NOT NULL UNIQUE,
   user_cell text NOT NULL,
   user_password text NOT NULL,
+  added_by text[2] --[0] type admin or client [1] id
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   PRIMARY KEY (user_id),
   FOREIGN KEY (client_id) REFERENCES clients(client_id)
@@ -54,7 +55,7 @@ CREATE TABLE panics(
   user_location text,
   panic_location text,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  user_helped_at TIMESTAMPTZ,
+  user_helped_at TIMESTAMPTZ,--from user
   client_responded_at TIMESTAMPTZ,
   responder_completed_at TIMESTAMPTZ,
   PRIMARY KEY (panic_id),

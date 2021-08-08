@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Panic.init(
     {
-      panic_id: { type: DataTypes.STRING, primaryKey: true, autoIncrement: false, allowNull: false },
+      panic_id: { type: DataTypes.UUID, primaryKey: true, autoIncrement: true, allowNull: false },
     },
     {
       tableName: "panics",
