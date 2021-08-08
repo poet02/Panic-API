@@ -10,12 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Panic.init(
+  Panic.init({},
     {
-      panic_id: { type: DataTypes.UUID, primaryKey: true, autoIncrement: true, allowNull: false },
-    },
-    {
-      tableName: "panics",
       sequelize,
       modelName: "Panic",
     }

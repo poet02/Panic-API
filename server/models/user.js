@@ -14,18 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  User.init(
+  User.init({},
     {
-      user_id: {
-        type: DataTypes.STRING,
-        primaryKey: true,
-        autoIncrement: false,
-        allowNull: false,
-      },
-      user_name: DataTypes.STRING,
-    },
-    {
-      tableName: "users",
       sequelize,
       modelName: "User",
     }

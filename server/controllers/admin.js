@@ -12,7 +12,7 @@ module.exports = {
             as: 'client'
           },
         ],
-        attributes: ['user_id', 'user_name'],
+        attributes: ['user_name'],
       })
       .then((users) => res.status(200).send(users))
       .catch((error) => { res.status(400).send(error); }); 

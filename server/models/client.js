@@ -11,12 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   };
-  Client.init({
-    client_id: { type: DataTypes.STRING, primaryKey: true, autoIncrement: false, allowNull: false },
-    // client_id: DataTypes.STRING,
-    client_name: DataTypes.STRING,
-  }, {
-    tableName: "clients",
+  Client.init({client_name: DataTypes.STRING}, {
     sequelize,
     modelName: 'Client',
   });
