@@ -9,6 +9,7 @@ import store from "./redux/store";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      {/* put nav bar here */}
       <App />
     </Provider>
   </React.StrictMode>,
