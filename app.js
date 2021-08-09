@@ -4,8 +4,6 @@ const app = express();
 const path = require("path");
 require("dotenv").config();
 
-const { Sequelize } = require("sequelize");
-
 var indexRouter = require('./routes/index');
 
 // // Set env variables in dev env
@@ -32,14 +30,6 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, async () => {
-  console.log(`Server is running.`);
-
-  const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_NAME, {
-    host: process.env.HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_NAME,
-    dialect: process.env.DIALECT,
-  });
-
+  console.log(`Server is running on port: `, PORT);
 });
 

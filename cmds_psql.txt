@@ -1,0 +1,19 @@
+
+pass: passworduse: postgres
+postgresl cmds:
+
+posgres is super user all admi to db.
+
+define password:
+
+login
+psql -U postgres
+
+list all db
+inot 
+
+\c todo_database
+
+
+show schema
+\dt
