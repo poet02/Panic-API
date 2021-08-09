@@ -3,7 +3,6 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Panics', {
       id: {
-        allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
@@ -13,7 +12,7 @@ module.exports = {
         type: Sequelize.UUID
       },
       responder_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       panic_type_id: {
         type: Sequelize.INTEGER
