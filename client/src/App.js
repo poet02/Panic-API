@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
-function App() {
+import { CssBaseline } from "@material-ui/core";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+
+// import Featured from "./components/Products/Product/featured";
+// import Filter from "./components/Products/Filter/Filter";
+// import PriceRanges from "./components/Products/Filter/PriceRanges";
+// import OrderBy from "./components/Products/Filter/OrderBy";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    
+      <Router>
+        <div>
+          <CssBaseline />
+         
+          <Switch>
+            <Route exact path='/'>
+              <div>homee</div>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;

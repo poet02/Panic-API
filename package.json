@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/poet02/Panic-API#readme",
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -35,5 +36,8 @@
     "concurrently": "^6.2.0",
     "nodemon": "^2.0.12",
     "sequelize-cli": "^6.2.0"
+  },
+  "nodemonConfig": {
+    "ignore": ["client"]
   }
 }
