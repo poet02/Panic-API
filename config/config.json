@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "pass",
+    "database": "aura",
+    "port":5433,
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "pass",
+    "database": "aura",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "pass",
+    "database": "aura",
+    "port":5432,
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false,
+    "use_env_variable": "DATABASE_URL"
+  }
+}
