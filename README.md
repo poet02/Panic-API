@@ -4,6 +4,7 @@ First, make sure you have have NodeJS and PostgreSQL installed. Visit the Postgr
 
 
 Running project locally:
+First, make sure you have have PostgreSQL installed and running. Visit the PostgreSQL home page for more info and to download the install file.
 
 Hop into the project directory and install the dependencies:
 
