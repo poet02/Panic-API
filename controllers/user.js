@@ -1,6 +1,6 @@
 const User = require('../models').User;
 const Panic = require('../models').Panic;
-const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
 
@@ -51,7 +51,6 @@ module.exports = {
     //TODO: authentication & authorization from token.
     return Panic
       .create({
-        id: uuid(),
         user_id: req.body.userId,
         user_ip: req.body.userIp,
         panic_type_id: req.body.panicType,

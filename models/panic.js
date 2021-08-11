@@ -10,12 +10,16 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Panic.init({},
+  Panic.init({
+    id: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
+      allowNull: false,
+      primaryKey: true
+    },
+    panic_location: { type: DataTypes.STRING},
+  },
     {      
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: Sequelize.UUIDV4
-      },
       sequelize,
       modelName: "Panic"
     }

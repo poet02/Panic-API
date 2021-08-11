@@ -1,6 +1,7 @@
 const User = require('../models').User;
 const Client = require('../models').Client;
 const Responder = require('../models').ClientResponder;
+const { uuid } = require('uuidv4');
 
 module.exports = {
   async listUsers (req, res) {
@@ -21,7 +22,21 @@ module.exports = {
     //TODO: authentication & authorization from token.
     
     //get client id from token
-    return Responder
+    return Client
+      .create({
+        client_name: req.body.name,
+        client_: req.body.responderEmail,
+        client_responder_password: req.body.responderPassword,
+        client_responder_cell: req.body.client_responder_cell,
+        client_id: req.body.client_id,
+      })
+      .then((responder) => res.status(201).send(responder))
+      .catch((error) => res.status(400).send(error));
+  },
+
+  addClient(req, res) {
+    //TODO: authentication & authorization from token.
+        return Client
       .create({
         client_responder_name: req.body.responderName,
         client_responder_email: req.body.responderEmail,
@@ -76,11 +91,6 @@ module.exports = {
 
   
 };
-
-//get all panics
-
-
-//add responder 
 
 
 

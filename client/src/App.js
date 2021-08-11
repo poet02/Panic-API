@@ -5,6 +5,7 @@ import { CssBaseline } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./views/home";
+import PanicDetails from "./views/PanicDetails";
 
 const App = () => {
   return (
