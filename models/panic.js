@@ -8,24 +8,22 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         as: "user",
       });
-    }
-    static associate(models) {
-      Panic.belongsTo(models.Responder, {
+      Panic.hasMany(models.Responder, {
         foreignKey: "responder_id",
         as: "responder",
       });
     }
+  
   }
-  Panic.init({
-    id: {
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-      allowNull: false,
-      primaryKey: true
+  Panic.init(
+    {
+      id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true
+      }
     },
-    panic_location: { type: DataTypes.STRING},
-  },
-    {      
+    {
       sequelize,
       modelName: "Panic"
     }

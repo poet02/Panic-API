@@ -21,7 +21,7 @@ const PanicList = () => {
         dispatch(listPanics());
     }, [dispatch]);
 
-    if (loading) {
+    if (loading ) {
         return <div style={{
             display: "flex",
             justifyContent: "center",
@@ -31,12 +31,22 @@ const PanicList = () => {
             <CircularProgress />
         </div>;
     }
-    let flatPanicData = panics.map((x) => {
-        return {
-            ...x,
-            user_name: x.user.user_name
-        }
-    })
+    if (!panics) {
+        return <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "calc(100vh)"
+        }}>
+           <div>Could not Retrieve Panic Data</div>
+        </div>;
+    }
+    // let flatPanicData = panics.map((x) => {
+    //     return {
+    //         ...x,
+    //         user_name: x.user.user_name
+    //     }
+    // })
     return (
         <div style={{ height: '100vh', width: '30%', overflowY: 'auto' }}>
             {panics.map((panic) => (<Panic key={panic.id} panic={panic}></Panic>))}

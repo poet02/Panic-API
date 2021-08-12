@@ -25,11 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true
     },
-    // responder_location: { type: DataTypes.STRING},
   },
     {      
       sequelize,
-      modelName: "Panic"
+      modelName: "PanicResponder"
     }
   );
   return PanicResponder;

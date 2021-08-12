@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
   router.get('/api/admin/user', adminController.listUsers);
   router.post('/api/admin/client', adminController.addClient);
   
+  router.post('/api/user/resister', userController.register);
   router.post('/api/user/panic', userController.addPanic);
 
   router.get('/api/panic', panicController.list);

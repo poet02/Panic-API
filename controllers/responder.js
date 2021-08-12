@@ -53,8 +53,8 @@ module.exports = {
       });
   },
 
-  updatePanic(req, res) {
-    Responder.findBy(req.body.responderId).then((responder) => {
+  async updatePanic(req, res) {
+    Responder.findByPk(req.body.responderId).then((responder) => {
         //TODO: client id and responder_id from token
       if (!responder) {
         res.status(404).send({
@@ -82,9 +82,6 @@ module.exports = {
             responder_id: req.body.responderId || panic.responder_id,
             responded_at: responded_at|| +new Date, //already responded?
             responder_completed_at: req.body.panicLocation || panic.responder_completed_at,
-          })
-          .then((panic) => {
-            //add to responderPanic table for trail :)
           })
           .then((panic) => res.status(200).send(panic))
           .catch((error) => res.status(400).send(error));
