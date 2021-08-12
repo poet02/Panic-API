@@ -1,6 +1,6 @@
 const User = require('../models').User;
 const Client = require('../models').Client;
-const Responder = require('../models').ClientResponder;
+const Responder = require('../models').Responder;
 const { uuid } = require('uuidv4');
 
 module.exports = {
@@ -26,8 +26,8 @@ module.exports = {
       .create({
         client_name: req.body.name,
         client_: req.body.responderEmail,
-        client_responder_password: req.body.responderPassword,
-        client_responder_cell: req.body.client_responder_cell,
+        responder_password: req.body.responderPassword,
+        responder_cell: req.body.responder_cell,
         client_id: req.body.client_id,
       })
       .then((responder) => res.status(201).send(responder))
@@ -38,10 +38,10 @@ module.exports = {
     //TODO: authentication & authorization from token.
         return Client
       .create({
-        client_responder_name: req.body.responderName,
-        client_responder_email: req.body.responderEmail,
-        client_responder_password: req.body.responderPassword,
-        client_responder_cell: req.body.client_responder_cell,
+        responder_name: req.body.responderName,
+        responder_email: req.body.responderEmail,
+        responder_password: req.body.responderPassword,
+        responder_cell: req.body.responder_cell,
         client_id: req.body.client_id,
       })
       .then((responder) => res.status(201).send(responder))
@@ -80,7 +80,7 @@ module.exports = {
             responder_id: req.body.responderId || responder_id.panic_location,
             panic_type_id: req.body.panicTypeId || responder_id.panic_type_id,
             panic_location: req.body.panicLocation || panic.panic_location,
-            client_responded_at: req.body.clientRespondedAt || panic.client_responded_at,
+            responded_at: req.body.clientRespondedAt || panic.responded_at,
             responder_completed_at: req.responderCompletedAt || panic.responder_completed_at,
           })
           .then(() => res.status(200).send(panic))

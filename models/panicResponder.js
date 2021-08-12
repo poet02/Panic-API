@@ -1,34 +1,36 @@
 "use strict";
 const { Model, Sequelize } = require("sequelize");
 
+
+//for every time a responder assigned to panic
 module.exports = (sequelize, DataTypes) => {
-  class Panic extends Model {
+  class PanicResponder extends Model {
     static associate(models) {
-      Panic.belongsTo(models.User, {
-        foreignKey: "user_id",
-        as: "user",
+        PanicResponder.belongsTo(models.Panic, {
+        foreignKey: "panic_id",
+        as: "panic",
       });
-    }
+    }    
     static associate(models) {
-      Panic.belongsTo(models.Responder, {
+        PanicResponder.belongsTo(models.Responder, {
         foreignKey: "responder_id",
-        as: "responder",
+        as: "Responder",
       });
     }
   }
-  Panic.init({
+  PanicResponder.init({
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       allowNull: false,
       primaryKey: true
     },
-    panic_location: { type: DataTypes.STRING},
+    // responder_location: { type: DataTypes.STRING},
   },
     {      
       sequelize,
       modelName: "Panic"
     }
   );
-  return Panic;
+  return PanicResponder;
 };
