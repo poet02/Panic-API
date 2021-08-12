@@ -21,7 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true
-      }
+      },
+      responder_id: {type: Sequelize.UUID},
+      user_id: {type: Sequelize.UUID},
+      client_responded_at: {type: Sequelize.DATE},
+      responder_completed_at: {type: Sequelize.DATE},
     },
     {
       sequelize,
