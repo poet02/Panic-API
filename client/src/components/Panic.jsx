@@ -19,6 +19,7 @@ import CallIcon from '@material-ui/icons/Call';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PersonIcon from '@material-ui/icons/Person';
 import Moment from 'react-moment';
+import UserDetails from './UserDetails';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function PanicCard({ panic }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -50,23 +52,29 @@ export default function PanicCard({ panic }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log('SinglePanic in home list', panic)
-  const userDetails = (
-    <div style={{ display: 'flex' }}>
-      <div >
-        <PersonIcon fontSize='small'></PersonIcon>
-        <Typography style={{ fontSize: '0.8em' }}>{panic.user.user_name || 'Unknown User'}</Typography>
-      </div>
-      <div>
-        <CallIcon fontSize='small'></CallIcon>
-        <Typography style={{ fontSize: '0.8em' }}>{panic.user.user_cell}</Typography>
-      </div> 
-      <div>
-        <LocationOnIcon fontSize='small'></LocationOnIcon>
-        <Typography style={{ fontSize: '0.8em' }}>{panic.panic_location || 'Location Unknown'}</Typography>
-      </div> 
-    </div>
-  )
+  if (panic.responder) {
+    console.log('SinglePanic in home list', panic.responder.responder_name)
+  }
+  const responder = panic.responder;
+
+
+
+  // const userDetails = (
+  //   <div >
+  //     <div style={{ display: 'flex' }}>
+  //       <PersonIcon fontSize='small'></PersonIcon>
+  //       <Typography style={{ fontSize: '0.8em' }}>{panic.user.user_name || 'Unknown User'}</Typography>
+  //     </div>
+  //     <div style={{ display: 'flex' }}>
+  //       <CallIcon fontSize='small'></CallIcon>
+  //       <Typography style={{ fontSize: '0.8em' }}>{panic.user.user_cell}</Typography>
+  //     </div> 
+  //     <div style={{ display: 'flex' }}>
+  //       <LocationOnIcon fontSize='small'></LocationOnIcon>
+  //       <Typography style={{ fontSize: '0.8em' }}>{panic.panic_location || 'Location Unknown'}</Typography>
+  //     </div> 
+  //   </div>
+  // )
 
   const time = (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -84,6 +92,7 @@ export default function PanicCard({ panic }) {
 
   )
 
+
   return (
     <Card key={panic.id} className={classes.root}>
       <CardHeader style={{}}
@@ -93,15 +102,16 @@ export default function PanicCard({ panic }) {
           </IconButton>
         }
         title={time}
-        subheader={userDetails}
+        subheader={(<UserDetails name={panic.user.user_name} location={panic.panic_location} contact={panic.user.user_cell} />)}
       />
-      <CardContent>
-        <Typography color="textSecondary" >
-          <div style={{ fontSize: 'small', display: 'flex' }}>
-            {/* <div style={{ display: 'flex' }}> */}
-              {panic.responder || 'No Responder Assigned'}
-          </div>
-        </Typography>
+      <CardContent style={{ fontSize: 'small', display: 'flex' }} color="textSecondary">
+        {panic.responder ?
+            <UserDetails
+              name={responder.responder_name}
+              contact={responder.responder_cell}
+              location={responder.responder_location} />
+          :
+          <div style={{ fontSize: 'small', display: 'flex' }}>No Responder Assigned</div>}
       </CardContent>
 
       <CardActions disableSpacing>

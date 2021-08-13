@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "client_id",
         as: "client",
       });
+      Responder.hasMany(models.Panic, {
+        foreignKey: "responder_id",
+        as: "responders",
+      });
     }
   }
   Responder.init({

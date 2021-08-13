@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         as: "user",
       });
-      Panic.hasMany(models.Responder, {
+      Panic.belongsTo(models.Responder, {
         foreignKey: "responder_id",
         as: "responder",
       });

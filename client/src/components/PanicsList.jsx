@@ -41,12 +41,6 @@ const PanicList = () => {
            <div>Could not Retrieve Panic Data</div>
         </div>;
     }
-    // let flatPanicData = panics.map((x) => {
-    //     return {
-    //         ...x,
-    //         user_name: x.user.user_name
-    //     }
-    // })
     return (
         <div style={{ height: '100vh', width: '30%', overflowY: 'auto' }}>
             {panics.map((panic) => (<Panic key={panic.id} panic={panic}></Panic>))}

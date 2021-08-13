@@ -1,5 +1,6 @@
 const User = require("../models").User;
 const Panic = require("../models").Panic;
+const  Responder = require("../models").Responder;
 
 module.exports = {
   //SHOULD NOT BE USED IN PROD
@@ -12,6 +13,11 @@ module.exports = {
           model: User,
           as: "user",
           attributes: ["user_name", "user_cell"],
+        },
+        {
+          model: Responder,
+          as: "responder",
+          attributes: ["responder_name", "responder_cell", "responder_location"],
         },
       ],
     })
