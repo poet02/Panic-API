@@ -4,21 +4,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPanics as listPanics } from "../redux/actions/panicActions";
 
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { DataGrid } from '@material-ui/data-grid';
 
 import PanicList from './../components/PanicsList';
+import SimpleMap from './../components/SimpleMap';
 
 
 
 const Home = () => {
   const dispatch = useDispatch();
- 
-
   useEffect(() => {
     dispatch(listPanics());
   }, [dispatch]);
   return (
-    <PanicList></PanicList>
+    <div style={{display: 'flex'}}>
+    {/* TODO: if mobile full screen*/}
+      <div style={{ height: '100vh', width: '30%', overflowY: 'auto' }}>
+        <PanicList />
+      </div>
+      {/* TODO: if mobile hide */}
+      <div style={{ height: '100vh', width: '70%', overflowY: 'auto' }}>
+        <SimpleMap />
+      </div>
+    </div>
   );
 }
 

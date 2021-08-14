@@ -26,6 +26,9 @@ module.exports = (sequelize, DataTypes) => {
       user_cell: { type: DataTypes.STRING },
       user_email: { type: DataTypes.STRING },
       user_password: { type: DataTypes.STRING },
+      user_location: { type: DataTypes.STRING },
+      user_lat: {type: Sequelize.FLOAT(11, 10) },
+      user_lng: { type: Sequelize.FLOAT(11, 10) },
     },
     {
       sequelize,

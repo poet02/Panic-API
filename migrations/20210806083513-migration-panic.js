@@ -21,6 +21,12 @@ module.exports = {
       user_ip: {
         type: Sequelize.STRING
       },      
+      panic_lat: {
+        type: Sequelize.FLOAT(11, 10)
+      },      
+      panic_lng: {
+        type: Sequelize.FLOAT(11, 10)   
+      },      
       panic_location: {
         type: Sequelize.STRING
       },

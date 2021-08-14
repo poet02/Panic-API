@@ -31,9 +31,16 @@ module.exports = {
       responder_location: {
         type: Sequelize.STRING
       },
-      // responder_busy: {
-      //   type: Sequelize.BOOLEAN,
-      // },
+      responder_lat: {
+        type:Sequelize.FLOAT(11, 10),
+      },
+      responder_lng: {
+        type:Sequelize.FLOAT(11, 10),
+      },
+      responder_busy: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

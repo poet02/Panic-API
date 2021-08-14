@@ -21,7 +21,7 @@ const PanicList = () => {
         dispatch(listPanics());
     }, [dispatch]);
 
-    if (loading ) {
+    if (loading) {
         return <div style={{
             display: "flex",
             justifyContent: "center",
@@ -38,11 +38,11 @@ const PanicList = () => {
             alignItems: "center",
             height: "calc(100vh)"
         }}>
-           <div>Could not Retrieve Panic Data</div>
+            <div>Could not Retrieve Panic Data</div>
         </div>;
     }
     return (
-        <div style={{ height: '100vh', width: '30%', overflowY: 'auto' }}>
+        <div>
             {panics.map((panic) => (<Panic key={panic.id} panic={panic}></Panic>))}
         </div>
     );

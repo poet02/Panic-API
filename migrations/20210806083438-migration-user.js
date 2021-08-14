@@ -23,6 +23,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      user_location: {
+        type: Sequelize.STRING
+      },
+      user_lat: {
+        type:Sequelize.FLOAT(11, 10),
+      },
+      user_lng: {
+        type:Sequelize.FLOAT(11, 10),
+      },
       user_password: {
         allowNull: false,
         type: Sequelize.STRING

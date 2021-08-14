@@ -7,6 +7,13 @@ module.exports = {
 
   list(req, res) {
     //client id by id
+
+    try {
+      //get lat long from location string
+
+    } catch (e) {
+
+    }
     return Panic.findAll({
       include: [
         {
@@ -17,7 +24,7 @@ module.exports = {
         {
           model: Responder,
           as: "responder",
-          attributes: ["responder_name", "responder_cell", "responder_location"],
+          attributes: ["responder_name", "responder_cell", "responder_location", "responder_lat", "responder_lng"],
         },
       ],
     })
