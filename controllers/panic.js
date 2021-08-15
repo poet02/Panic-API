@@ -6,14 +6,6 @@ module.exports = {
   //SHOULD NOT BE USED IN PROD
 
   list(req, res) {
-    //client id by id
-
-    try {
-      //get lat long from location string
-
-    } catch (e) {
-
-    }
     return Panic.findAll({
       include: [
         {
