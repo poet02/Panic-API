@@ -3,6 +3,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Panics', {
       id: {
+        allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
@@ -19,6 +20,12 @@ module.exports = {
       },
       user_ip: {
         type: Sequelize.STRING
+      },      
+      panic_lat: {
+        type: Sequelize.FLOAT(11, 10)
+      },      
+      panic_lng: {
+        type: Sequelize.FLOAT(11, 10)   
       },      
       panic_location: {
         type: Sequelize.STRING

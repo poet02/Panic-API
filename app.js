@@ -27,5 +27,6 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, async () => {
+  console.log('server running on,')
 });
 

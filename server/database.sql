@@ -15,16 +15,16 @@ CREATE TABLE clients(
   PRIMARY KEY (client_id)
 );
 
-CREATE TABLE client_responders(
-  client_responder_id UUID DEFAULT uuid_generate_v4(),
+CREATE TABLE responders(
+  responder_id UUID DEFAULT uuid_generate_v4(),
   client_id UUID NOT NULL, --can be null
-  client_responder_name text NOT NULL,
-  client_responder_email text NOT NULL UNIQUE,
-  client_responder_password text NOT NULL,
-  client_responder_cell text NOT NULL,
-  client_responder_location text, --will be generated when responder accepts panic
+  responder_name text NOT NULL,
+  responder_email text NOT NULL UNIQUE,
+  responder_password text NOT NULL,
+  responder_cell text NOT NULL,
+  responder_location text, --will be generated when responder accepts panic
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  PRIMARY KEY (client_responder_id),
+  PRIMARY KEY (responder_id),
   FOREIGN KEY (client_id) REFERENCES clients(client_id)
 );
 
@@ -61,6 +61,6 @@ CREATE TABLE panics(
   responder_completed_at TIMESTAMPTZ,
   PRIMARY KEY (panic_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (responder_id) REFERENCES client_responders(client_responder_id),
+  FOREIGN KEY (responder_id) REFERENCES responders(responder_id),
   FOREIGN KEY (panic_type_id) REFERENCES panic_types(panic_type_id)
 );

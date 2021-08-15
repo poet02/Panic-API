@@ -14,10 +14,22 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  User.init({
-    user_name: {type: DataTypes.STRING},
-    user_cell: {type: DataTypes.STRING}
-  },
+  User.init(
+    {
+      id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
+        primaryKey: true,
+      },
+      user_name: { type: DataTypes.STRING },
+      user_cell: { type: DataTypes.STRING },
+      user_email: { type: DataTypes.STRING },
+      user_password: { type: DataTypes.STRING },
+      user_location: { type: DataTypes.STRING },
+      user_lat: {type: Sequelize.FLOAT(11, 10) },
+      user_lng: { type: Sequelize.FLOAT(11, 10) },
+    },
     {
       sequelize,
       modelName: "User",

@@ -2,7 +2,7 @@ const user = require('./user');
 const admin = require('./admin');
 const client = require('./client');
 const panic = require('./panic');
-const clientResponder = require('./clientResponder');
+const responder = require('./responder');
 const panicType = require('./panicType');
 
 module.exports = {
@@ -10,6 +10,7 @@ module.exports = {
   admin,
   client,
   panic,
-  clientResponder,
+  responder,
   panicType
 };
+ 

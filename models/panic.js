@@ -8,14 +8,29 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         as: "user",
       });
+      Panic.belongsTo(models.Responder, {
+        foreignKey: "responder_id",
+        as: "responder",
+      });
     }
+  
   }
-  Panic.init({},
-    {      
+  Panic.init(
+    {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: Sequelize.UUIDV4
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true
       },
+      responder_id: {type: Sequelize.UUID},
+      user_id: {type: Sequelize.UUID},
+      panic_location: {type: Sequelize.STRING},
+      panic_lat: {type: Sequelize.FLOAT(11, 10)},
+      panic_lng: {type: Sequelize.FLOAT(11, 10)},
+      client_responded_at: {type: Sequelize.DATE},
+      responder_completed_at: {type: Sequelize.DATE},
+    },
+    {
       sequelize,
       modelName: "Panic"
     }

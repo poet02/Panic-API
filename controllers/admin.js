@@ -18,6 +18,19 @@ module.exports = {
       .catch((error) => { res.status(400).send(error); }); 
   },
 
+   listResponders (req, res) {
+   return Responder.findAll({
+        include: [{
+            model: Client,
+            as: 'client'
+          },
+        ],
+        attributes: ['user_name'],
+      })
+      .then((users) => res.status(200).send(users))
+      .catch((error) => { res.status(400).send(error); }); 
+  },
+
   addClient(req, res) {
     //TODO: authentication & authorization from token.
     return Client

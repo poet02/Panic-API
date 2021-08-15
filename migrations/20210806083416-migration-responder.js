@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ClientResponders', {
+    return queryInterface.createTable('Responders', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -12,24 +12,34 @@ module.exports = {
         allowNull: false,
         type: Sequelize.UUID
       },
-      client_responder_name: {
+      responder_name: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      client_responder_email: {
+      responder_email: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      client_responder_password: {
+      responder_password: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      client_responder_cell: {
+      responder_cell: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      client_responder_location: {
+      responder_location: {
         type: Sequelize.STRING
+      },
+      responder_lat: {
+        type:Sequelize.FLOAT(11, 10),
+      },
+      responder_lng: {
+        type:Sequelize.FLOAT(11, 10),
+      },
+      responder_busy: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       createdAt: {
         allowNull: false,
@@ -42,6 +52,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('ClientResponders');
+    return queryInterface.dropTable('Responders');
   }
 };
