@@ -1,6 +1,7 @@
 const User = require('../models').User;
 const Panic = require('../models').Panic;
 const { v4: uuidv4 } = require('uuid');
+const axios = require('axios');
 
 module.exports = {
 
@@ -47,9 +48,26 @@ module.exports = {
   //     .catch((error) => res.status(400).send(error));
   // },
 
-  addPanic(req, res) {
+  async addPanic(req, res) {
     //TODO: authentication & authorization from token.
-    console.log('fuuuuck', req.body.userId)
+    let formattedAddress = req.body.panicLocation.replace(/\s/g, '+');
+
+    let googleMapUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${formattedAddress}&key=AIzaSyDjSzLWcWKHO6F_6e9AjcticwLeDU39dS4`
+    let googleLocation = {};
+   await axios.get(googleMapUrl)
+    .then(function (response) {
+      // handle success
+      googleLocation = response.data.results[0].geometry.location; 
+      //console.log(response.data.results[0].geometry.location);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+    // return  res.status(200);
     return Panic
       .create({
         id: uuidv4(),
@@ -57,6 +75,8 @@ module.exports = {
         user_ip: req.body.userIp,
         panic_type_id: req.body.panicType,
         panic_location: req.body.panicLocation,
+        panic_lat: googleLocation.lat || req.body.panic_lat,
+        panic_lng: googleLocation.lng || req.body.panic_lng,
         responder_id: req.body.responderId,
         responder_location: req.body.responderLocation,
       })

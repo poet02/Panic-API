@@ -23,7 +23,7 @@ router.get("/api/panic", panicController.list);
 
 //RESPONDER
 router.get("/api/responder", panicController.list);
-router.post("/api/responder/acceptPanic", responderController.assignPanic);
+router.post("/api/responder/acceptPanic", responderController.acceptPanic);
 router.get('/api/responder/myPanic', responderController.myPanics);
 
 module.exports = router;

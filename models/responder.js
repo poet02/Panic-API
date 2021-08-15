@@ -24,9 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     responder_location: { type: DataTypes.STRING},
     responder_name: { type: DataTypes.STRING},
     responder_cell: { type: DataTypes.STRING},
-    panic_location: {type: Sequelize.STRING},
-    responder_lat: { type: Sequelize.FLOAT(11, 10)},
-    responder_lng: { type: Sequelize.FLOAT(11, 10)},
+    responder_lat: { type: Sequelize.FLOAT},
+    responder_lng: { type: Sequelize.FLOAT},
   },
     {      
       sequelize,

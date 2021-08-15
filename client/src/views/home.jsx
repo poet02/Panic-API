@@ -12,6 +12,11 @@ import SimpleMap from './../components/SimpleMap';
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [mapPanic, setMapPanic] = useState({});
+
+  const handleUpdateMap = (panic) => {
+    setMapPanic(panic);
+  };
   useEffect(() => {
     dispatch(listPanics());
   }, [dispatch]);
@@ -19,11 +24,11 @@ const Home = () => {
     <div style={{display: 'flex'}}>
     {/* TODO: if mobile full screen*/}
       <div style={{ height: '100vh', width: '30%', overflowY: 'auto' }}>
-        <PanicList />
+        <PanicList onUpdateMap={handleUpdateMap}/>
       </div>
       {/* TODO: if mobile hide */}
       <div style={{ height: '100vh', width: '70%', overflowY: 'auto' }}>
-        <SimpleMap />
+        <SimpleMap panic={mapPanic} />
       </div>
     </div>
   );

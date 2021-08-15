@@ -13,7 +13,7 @@ import Panic from './Panic';
 //     },
 // })
 
-const PanicList = () => {
+const PanicList = ({ onUpdateMap }) => {
     const dispatch = useDispatch();
     const { panics, loading } = useSelector((state) => state.getPanics);
 
@@ -43,7 +43,7 @@ const PanicList = () => {
     }
     return (
         <div>
-            {panics.map((panic) => (<Panic key={panic.id} panic={panic}></Panic>))}
+            {panics.map((panic) => (<Panic onUpdateMap={onUpdateMap} key={panic.id} panic={panic}></Panic>))}
         </div>
     );
 }

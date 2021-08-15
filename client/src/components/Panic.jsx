@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PanicCard({ panic }) {
+export default function PanicCard({ panic, onUpdateMap }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   // const panic = data.panic;
@@ -57,25 +57,10 @@ export default function PanicCard({ panic }) {
   }
   const responder = panic.responder;
 
+  const handleUpdateGoogleMap = (panic) => onUpdateMap(panic);
 
 
-  // const userDetails = (
-  //   <div >
-  //     <div style={{ display: 'flex' }}>
-  //       <PersonIcon fontSize='small'></PersonIcon>
-  //       <Typography style={{ fontSize: '0.8em' }}>{panic.user.user_name || 'Unknown User'}</Typography>
-  //     </div>
-  //     <div style={{ display: 'flex' }}>
-  //       <CallIcon fontSize='small'></CallIcon>
-  //       <Typography style={{ fontSize: '0.8em' }}>{panic.user.user_cell}</Typography>
-  //     </div> 
-  //     <div style={{ display: 'flex' }}>
-  //       <LocationOnIcon fontSize='small'></LocationOnIcon>
-  //       <Typography style={{ fontSize: '0.8em' }}>{panic.panic_location || 'Location Unknown'}</Typography>
-  //     </div> 
-  //   </div>
-  // )
-
+  
   const time = (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
@@ -89,13 +74,11 @@ export default function PanicCard({ panic }) {
       </Moment>
 
     </div>
-
   )
 
-
   return (
-    <Card key={panic.id} className={classes.root}>
-      <CardHeader style={{}}
+    <Card className={classes.root} onClick={() => handleUpdateGoogleMap(panic)}>
+      <CardHeader
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />

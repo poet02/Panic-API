@@ -43,7 +43,7 @@ module.exports = {
   },
 
   myPanics(req, res) {
-    //Panics that responders wills seee on there dashboard
+    //Panics that responders wills see on there dashboard
     return Panic.findAll({
       where: {
         client_id: req.body.clientId,
@@ -62,7 +62,7 @@ module.exports = {
       });
   },
 
-  assignPanic(req, res) {
+  acceptPanic(req, res) {
     Responder.findByPk(req.body.responderId)
       .then((responder) => {
         if (!responder) {
@@ -70,6 +70,13 @@ module.exports = {
             message: "Responder Not Found",
           });
         }
+
+        responder
+        .update({
+          responder_lat: req.body.responderLat || responder.responder_lat,
+          responder_lng: req.body.responderLng || responder.responder_lng,
+        })
+        .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
 
@@ -80,6 +87,7 @@ module.exports = {
             message: "Panic Not Found",
           });
         }
+       
         return panic
           .update({
             responder_id: req.body.responderId || panic.responder_id,
