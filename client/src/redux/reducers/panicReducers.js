@@ -3,12 +3,10 @@ import * as actionTypes from "../constants/panicConstants";
 export const getPanicsReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.GET_PANICS_REQUEST:
-      return {
-        ...state
-      };
+      return {...state}
     case actionTypes.GET_PANICS_SUCCESS:
       return {
-        ...state,
+        // ...state,
         panics: action.payload,
       };
     case actionTypes.GET_PANICS_FAIL:

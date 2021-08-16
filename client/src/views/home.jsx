@@ -20,9 +20,10 @@ const Home = () => {
     dispatch(listPanics());
   }, [dispatch]);
 
-  // useInterval(() => {
-  //   dispatch(listPanics());
-  // }, [dispatch]);
+  useInterval(() => {
+    console.log('panics')
+    dispatch(listPanics());
+  }, 1500);
 
   return (
     <>
