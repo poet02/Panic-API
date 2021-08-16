@@ -1,33 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { getPanics as listPanics } from "../redux/actions/panicActions";
-import { getPanics } from "../redux/actions/panicActions";
+import { useSelector } from "react-redux";
 
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Panic from './Panic';
-import useInterval from '../hooks/useInterval';
 
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//       maxWidth: 345,
-//     },
-// })
 
 const PanicList = ({ onUpdateMap }) => {
-    const { panics, loading } = useSelector((state) => state.getPanics);
 
-    if (!loading) {
-        return <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "calc(100vh)"
-        }}>
-            <CircularProgress />
-        </div>;
-    }
+    const {panics} = useSelector((state) => state.getPanics);
+
+
     if (!panics) {
         return <div style={{
             display: "flex",
@@ -35,7 +17,7 @@ const PanicList = ({ onUpdateMap }) => {
             alignItems: "center",
             height: "calc(100vh)"
         }}>
-            <div>Could not Retrieve Panic Data</div>
+            <div>There are no panics</div>
         </div>;
     }
     return (

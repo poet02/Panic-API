@@ -1,6 +1,6 @@
 import * as actionTypes from "../constants/panicConstants";
 
-export const getPanicsReducer = (state = { panics: [] }, action) => {
+export const getPanicsReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.GET_PANICS_REQUEST:
       return {
@@ -9,7 +9,6 @@ export const getPanicsReducer = (state = { panics: [] }, action) => {
     case actionTypes.GET_PANICS_SUCCESS:
       return {
         panics: action.payload,
-        loading: false,
       };
     case actionTypes.GET_PANICS_FAIL:
       return {
