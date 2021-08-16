@@ -29,13 +29,13 @@ const Home = () => {
   const handleUpdateMap = (panic) => {
     setMapPanic(panic);
   };
-  // useEffect(() => {
-  //   dispatch(listPanics());
-  // }, [dispatch]);
-
-  useInterval(() => {
+  useEffect(() => {
     dispatch(listPanics());
   }, [dispatch]);
+
+  // useInterval(() => {
+  //   dispatch(listPanics());
+  // }, [dispatch]);
 
   return (
     <>
