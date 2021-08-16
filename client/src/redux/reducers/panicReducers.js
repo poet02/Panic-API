@@ -8,6 +8,7 @@ export const getPanicsReducer = (state = {}, action) => {
       };
     case actionTypes.GET_PANICS_SUCCESS:
       return {
+        ...state,
         panics: action.payload,
       };
     case actionTypes.GET_PANICS_FAIL:
