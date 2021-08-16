@@ -6,8 +6,6 @@ require("dotenv").config();
 
 var indexRouter = require('./routes/index');
 
-// // Set env variables in dev env
-// if (app.get('env') == 'development') require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());

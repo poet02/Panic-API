@@ -16,12 +16,9 @@ import useInterval from '../hooks/useInterval';
 // })
 
 const PanicList = ({ onUpdateMap }) => {
-    const dispatch = useDispatch();
     const { panics, loading } = useSelector((state) => state.getPanics);
-    const {panicl, setPanicsL} = useState({});
 
-
-    if (!panics) {
+    if (!loading) {
         return <div style={{
             display: "flex",
             justifyContent: "center",

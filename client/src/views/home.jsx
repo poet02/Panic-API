@@ -18,13 +18,13 @@ const Home = () => {
   const handleUpdateMap = (panic) => {
     setMapPanic(panic);
   };
-  // useEffect(() => {
-  //   dispatch(listPanics());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(listPanics());
+  }, [dispatch]);
 
-   useInterval(() => {
-        dispatch(listPanics());
-    }, [dispatch]);
+  //  useInterval(() => {
+  //       dispatch(listPanics());
+  //   }, [dispatch]);
   return (
     <div style={{display: 'flex'}}>
     {/* TODO: if mobile full screen*/}
