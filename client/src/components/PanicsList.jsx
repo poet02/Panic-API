@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPanics as listPanics } from "../redux/actions/panicActions";
+import { getPanics } from "../redux/actions/panicActions";
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Panic from './Panic';
+import useInterval from '../hooks/useInterval';
 
 
 // const useStyles = makeStyles((theme) => ({
@@ -16,12 +18,10 @@ import Panic from './Panic';
 const PanicList = ({ onUpdateMap }) => {
     const dispatch = useDispatch();
     const { panics, loading } = useSelector((state) => state.getPanics);
+    const {panicl, setPanicsL} = useState({});
 
-    useEffect(() => {
-        dispatch(listPanics());
-    }, [dispatch]);
 
-    if (loading) {
+    if (!panics) {
         return <div style={{
             display: "flex",
             justifyContent: "center",

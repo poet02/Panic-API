@@ -4,8 +4,7 @@ export const getPanicsReducer = (state = { panics: [] }, action) => {
   switch (action.type) {
     case actionTypes.GET_PANICS_REQUEST:
       return {
-        loading: true,
-        panics: [],
+        ...state
       };
     case actionTypes.GET_PANICS_SUCCESS:
       return {

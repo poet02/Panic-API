@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getPanics as listPanics } from "../redux/actions/panicActions";
+import useInterval from '../hooks/useInterval';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -17,9 +18,13 @@ const Home = () => {
   const handleUpdateMap = (panic) => {
     setMapPanic(panic);
   };
-  useEffect(() => {
-    dispatch(listPanics());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(listPanics());
+  // }, [dispatch]);
+
+   useInterval(() => {
+        dispatch(listPanics());
+    }, [dispatch]);
   return (
     <div style={{display: 'flex'}}>
     {/* TODO: if mobile full screen*/}
