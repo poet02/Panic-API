@@ -13,19 +13,6 @@ import SimpleMap from './../components/SimpleMap';
 const Home = () => {
   const dispatch = useDispatch();
   const [mapPanic, setMapPanic] = useState({});
-
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true,
-  });
-
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
   const handleUpdateMap = (panic) => {
     setMapPanic(panic);
   };
@@ -41,7 +28,7 @@ const Home = () => {
     <>
       < div style={{ display: 'flex' }}>
         <div style={{ height: '100vh', width: '30%', overflowY: 'auto' }}>
-          <PanicList onUpdateMap={handleUpdateMap} />
+          <PanicList onUpdateMap={handleUpdateMap} selected={mapPanic.id}/>
         </div>
         {/* TODO: if mobile hide */}
         <div style={{ height: '100vh', width: '70%', overflowY: 'auto' }}>

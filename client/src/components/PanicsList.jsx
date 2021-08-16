@@ -7,11 +7,11 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const PanicList = ({ onUpdateMap }) => {
+const PanicList = ({ onUpdateMap, selected }) => {
 
 	const { panics } = useSelector((state) => state.getPanics);
 
-	const [state, setState] = React.useState({
+	const [filerState, setState] = React.useState({
 		checkedNoResponder: true,
 		checkedActive: true,
 
@@ -19,9 +19,8 @@ const PanicList = ({ onUpdateMap }) => {
 
 
 const handleChange = (event) => {
-		setState({ ...state, [event.target.name]: event.target.checked });
+		setState({ ...filerState, [event.target.name]: event.target.checked });
 };
-
 
 	if (!panics) {
 		return <div style={{
@@ -37,16 +36,11 @@ const handleChange = (event) => {
 		<div>
 			<FormGroup style={{paddingLeft: '10px'}} row>
 				<FormControlLabel
-					control={<Checkbox checked={state.checkedNoResponder} onChange={handleChange} name="checkedNoResponder" color="primary"/>}
-					label="No Responder"
+					control={<Checkbox checked={filerState.hasResponder} onChange={handleChange} name="hasResponder" color="primary"/>}
+					label="Responder Assigned"
 				/>
-				<FormControlLabel
-					control={<Checkbox checked={state.checkedActive}	onChange={handleChange} name="checkedActive"	color="primary"/>}
-					label="Active"
-				/>
-		
 			</FormGroup>
-			{panics.map((panic) => (<Panic onUpdateMap={onUpdateMap} key={panic.id} panic={panic}></Panic>))}
+			{panics.map((panic) => (<Panic filterState={filerState} selected={selected} onUpdateMap={onUpdateMap} key={panic.id} panic={panic}></Panic>))}
 		</div>
 	);
 }

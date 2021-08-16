@@ -45,16 +45,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PanicCard({ panic, onUpdateMap }) {
+export default function PanicCard({ filterState, panic, onUpdateMap, selected }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   // const panic = data.panic;
+  if (filterState.hasResponder && !panic.responder) {
+    return null;
+  }
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  if (panic.responder) {
-    console.log('SinglePanic in home list', panic.responder.responder_name)
-  }
+
   const responder = panic.responder;
 
   const handleUpdateGoogleMap = (panic) => onUpdateMap(panic);
@@ -76,8 +78,13 @@ export default function PanicCard({ panic, onUpdateMap }) {
     </div>
   )
 
+  let selectedPanicClass = '';
+  if (selected === panic.id) {
+    selectedPanicClass = 'solid blue';
+  }
+
   return (
-    <Card className={classes.root} onClick={() => handleUpdateGoogleMap(panic)}>
+    <Card style={{border: selectedPanicClass, cursor: 'pointer'}} className={classes.root} onClick={() => handleUpdateGoogleMap(panic)}>
       <CardHeader
         action={
           <IconButton aria-label="settings">
@@ -111,7 +118,7 @@ export default function PanicCard({ panic, onUpdateMap }) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>Extra Panic Details</Typography>
         </CardContent>
       </Collapse>
     </Card>
