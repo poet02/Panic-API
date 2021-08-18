@@ -1,9 +1,11 @@
 const user = require('./user');
-const admin = require('./admin');
 const client = require('./client');
 const panic = require('./panic');
 const responder = require('./responder');
 const panicType = require('./panicType');
+const admin = require('./admin'); 
+const auth = require('./auth'); 
+
 
 module.exports = {
   user,
@@ -11,6 +13,7 @@ module.exports = {
   client,
   panic,
   responder,
-  panicType
+  panicType,
+  auth
 };
  

@@ -82,18 +82,6 @@ module.exports = {
       });
   },
 
-  // addClient(req, res) { WILL MOVE ALL REGISTER AND LOGIN TO AUTH
-  //   //TODO: authentication & authorization from token.
-  //   return Client.create({
-  //     client_name: req.body.clientName,
-  //     client_email: req.body.panicType,
-  //     client_password: req.body.clientPassword,
-  //     client_owner_name: req.body.clientOwnerName,
-  //   })
-  //     .then((client) => res.status(201).send(client))
-  //     .catch((error) => res.status(400).send(error));
-  // },
-
   updatePanic(req, res) {
     return Panic.findByPk(req.params.id)
       .then((panic) => {

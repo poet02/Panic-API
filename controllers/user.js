@@ -1,34 +1,77 @@
 const User = require("../models").User;
 const Panic = require("../models").Panic;
+const Client = require("../models").Client;
 const { v4: uuidv4 } = require("uuid");
+const bcrypt = require("bcrypt");
 const axios = require("axios");
+const { Op } = require("sequelize");
+const jwtGenerator = require("../utils/jwtGenerator");
 
 module.exports = {
-  // register(req, res) {
-  //   //TODO: authentication & authorization from token.
-  //   return User.create({
-  //     user_name: req.body.userName,
-  //     user_email: req.body.userEmail,
-  //     user_cell: req.body.userCell,
-  //     user_password: req.body.password,
-  //     client_id: req.body.clientId,
-  //   })
-  //     .then((user) => res.status(201).send(user))
-  //     .catch((error) => res.status(400).send(error));
-  // },
+  async register(req, res) {
+    try {
+      const users = await User.findAll({
+        where: {
+          [Op.or]: [
+            { user_cell: req.body.cell },
+            { user_email: req.body.email },
+          ],
+        },
+      });
+      if (users.length > 0) {
+        return res.status(401).send({
+          message: "User email or cell exists!",
+        });
+      }
 
-  // login(req, res) {
-  //   //TODO: authentication & authorization from token.
-  //   return Panic.create({
-  //     user_name: req.body.name,
-  //     client_id: req.body.clientId,
-  //     user_email: req.body.email,
-  //     user_password: req.body.password,
-  //     user_cell: req.body.cell,
-  //   })
-  //     .then((panic) => res.status(201).send(panic))
-  //     .catch((error) => res.status(400).send(error));
-  // },
+      const client = await Client.findByPk(req.body.clientId, {});
+
+      if (!client) {
+        return res.status(401).send({
+          message: "Client does not exist!",
+        });
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const bcryptPassword = await bcrypt.hash(req.body.password, salt);
+
+      return User.create({
+        user_name: req.body.name,
+        user_email: req.body.email,
+        user_cell: req.body.cell,
+        user_password: bcryptPassword,
+        client_id: req.body.clientId,
+      })
+        .then((user) => {
+          const jwtToken = jwtGenerator(user, "USER");
+          res.status(201).send(jwtToken);
+        })
+        .catch((error) => res.status(400).send(error));
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+
+  async login(req, res) {
+    const user = await User.findOne({
+      where: { user_cell: req.body.cell },
+      });
+    if (!user) {
+      return res.status(401).send({
+        message: "Invalid Credential",
+      });
+    }
+
+    const validPassword = await bcrypt
+      .compare(req.body.password, user.user_password)
+      .catch((error) => res.status(400).send(error));
+
+      if (!validPassword) {
+        return res.status(401).json("Invalid Credential");
+      }
+      const jwtToken = jwtGenerator(user, 'USER');
+      return res.status(200).send(jwtToken);;
+  },
 
   async addPanic(req, res) {
     //TODO: authentication & authorization from token.
