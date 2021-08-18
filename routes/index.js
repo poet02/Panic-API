@@ -11,19 +11,35 @@ router.get("/", function (req, res, next) {
 });
 
 //ADMIN
+router.get("/api/admin/panic", adminController.listPanics);
 router.get("/api/admin/user", adminController.listUsers);
-router.post("/api/admin/client", adminController.addClient);
+// router.get("/api/admin/client", adminController.listClients);
+// router.post("/api/admin/client", adminController.listClients);
+router.post("/api/admin/client/add", adminController.addClient);
 
-//USER
-router.post("/api/user/register", userController.register);
-router.post("/api/user/panic", userController.addPanic);
+//CLIENT
+// router.post("/api/client/register", clientController.register); 
+// router.post("/api/client/user", userController.listUsers); 
+// router.get("/api/client/responder", userController.listResponders); 
+// router.get("/api/client/responder/a", userController.listResponders); 
 
-//PANIC
-router.get("/api/panic", panicController.list);
 
 //RESPONDER
-router.get("/api/responder", panicController.list);
-router.post("/api/responder/acceptPanic", responderController.acceptPanic);
-router.get('/api/responder/myPanic', responderController.myPanics);
+// router.post("/api/client/register", clientController.register); 
+// router.post("/api/client/user", userController.listUsers); 
+// router.get("/api/client/responder", userController.listResponders); 
+// router.get("/api/client/responder", userController.listResponders); 
+
+
+//USER 
+// router.post("/api/user/login", userController.login); 
+// router.post("/api/user/panic", userController.addPanic);
+router.post("/api/user/panic/add", userController.addPanic);
+router.post("/api/user/panic/update", userController.updatePanic);
+// router.get('/api/user/myPanics', responderController.myPanics);
+
+
+//RESPONDER
+router.post("/api/responder/panic/update", responderController.updatePanic);
 
 module.exports = router;

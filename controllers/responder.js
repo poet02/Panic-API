@@ -3,20 +3,6 @@ const Panic = require("../models").Panic;
 const Responder = require("../models").Responder;
 
 module.exports = {
-  //listAllResponders
-  list(req, res) {
-    //find other responders in clients
-    return Responder.findAll({
-      where: {
-        client_id: req.body.clientId, //will eventually com from token in header
-      },
-    })
-      .then((responders) => res.status(200).send(responders))
-      .catch((error) => {
-        res.status(400).send(error);
-      });
-  },
-
   //update responderInfo
   update(req, res) {
     Responder.findByPk(req.params.id, {})
@@ -42,27 +28,8 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  myPanics(req, res) {
-    //Panics that responders wills see on there dashboard
-    return Panic.findAll({
-      where: {
-        client_id: req.body.clientId,
-      },
-      include: [
-        {
-          model: User,
-          as: "user",
-        },
-      ],
-      attributes: ["panic_id"],
-    })
-      .then((users) => res.status(200).send(users))
-      .catch((error) => {
-        res.status(400).send(error);
-      });
-  },
 
-  acceptPanic(req, res) {
+  updatePanic(req, res) {
     Responder.findByPk(req.body.responderId)
       .then((responder) => {
         if (!responder) {
@@ -92,6 +59,7 @@ module.exports = {
           .update({
             responder_id: req.body.responderId || panic.responder_id,
             client_responded_at: panic.client_responded_at || panic.updatedAt,
+            responder_completedAt_at: req.body.responderResolved? panic.updatedAt : null,
           })
           .then((panic) => res.status(200).send(panic))
           .catch((error) => res.status(400).send(error));
