@@ -1,7 +1,6 @@
 const User = require("../models").User;
 const Panic = require("../models").Panic;
 const Client = require("../models").Client;
-const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 const { Op } = require("sequelize");
@@ -89,10 +88,9 @@ module.exports = {
       });
 
     return Panic.create({
-      id: uuidv4(),
       user_id: req.body.userId,
       user_ip: req.body.userIp,
-      user_description: req.body.userDescription || panic.user_description,
+      user_description: req.body.userDescription,
       panic_type_id: req.body.panicType,
       panic_location: req.body.panicLocation,
       panic_lat: googleLocation.lat || req.body.panic_lat,

@@ -1,15 +1,21 @@
 const User = require("../models").User;
+const Client = require("../models").Client;
 const Panic = require("../models").Panic;
 const Responder = require("../models").Responder;
+const { Op } = require("sequelize");
+const bcrypt = require("bcrypt");
+const axios = require("axios");
+const jwtGenerator = require("../utils/jwtGenerator");
+
 
 module.exports = {
   async register(req, res) {
     try {
-      const responders = await User.findAll({
+      const responders = await Responder.findAll({
         where: {
           [Op.or]: [
-            { user_cell: req.body.cell },
-            { user_email: req.body.email },
+            { responder_cell: req.body.cell },
+            { responder_email: req.body.email },
           ],
         },
       });
@@ -20,6 +26,7 @@ module.exports = {
       }
 
       const client = await Client.findByPk(req.body.clientId, {});
+      console.log('test', client)
 
       if (!client) {
         return res.status(401).send({
@@ -29,6 +36,8 @@ module.exports = {
 
       const salt = await bcrypt.genSalt(10);
       const bcryptPassword = await bcrypt.hash(req.body.password, salt);
+      console.log('test final')
+
 
       return Responder.create({
         responder_name: req.body.name,

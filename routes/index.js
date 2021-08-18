@@ -20,7 +20,8 @@ router.post("/auth/login", authController.login);
 //ADMIN
 router.get("/api/admin/panic", adminController.listPanics);
 router.get("/api/admin/user", adminController.listUsers);
-// router.get("/api/admin/client", adminController.listClients);
+router.get("/api/admin/client", adminController.listClients);
+router.get("/api/admin/responder", adminController.listResponders);
 
 
 //CLIENT
@@ -28,8 +29,8 @@ router.post("/api/client/register", clientController.register);
 router.post("/api/client/login", clientController.login)
 
 //RESPONDER
-router.post("/api/responder/register", responderController.register); 
-router.post("/api/responder/login", responderController.login);
+router.post("/auth/responder/register", responderController.register); 
+router.post("/auth/responder/login", responderController.login);
 router.post("/api/responder/panic/update", responderController.updatePanic);
 // router.get('/api/responder/panic', responderController.myPanics);
 

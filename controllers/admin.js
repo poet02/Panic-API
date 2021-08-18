@@ -1,6 +1,7 @@
 const User = require("../models").User;
 const Client = require("../models").Client;
-const Panic = require("../models").Panic;
+const Panic = require("../models"). Panic;
+const Responder = require("../models").Responder;
 
 module.exports = {
   listPanics(req, res) {
@@ -25,6 +26,16 @@ module.exports = {
       ],
     })
       .then((users) => res.status(200).send(users))
+      .catch((error) => {
+        res.status(400).send(error);
+      });
+  },
+
+  listClients(req, res) {
+    return Client.findAll({
+      attributes: ["client_name", "client_phone_number", "client_email"],
+    })
+      .then((clients) => res.status(200).send(clients))
       .catch((error) => {
         res.status(400).send(error);
       });
@@ -58,15 +69,9 @@ module.exports = {
 
   listResponders(req, res) {
     return Responder.findAll({
-      include: [
-        {
-          model: Client,
-          as: "client",
-        },
-      ],
-      attributes: ["user_name"],
+      attributes: ["id", "responder_name", "responder_cell", "client_id"],
     })
-      .then((users) => res.status(200).send(users))
+      .then((responders) => res.status(200).send(responders))
       .catch((error) => {
         res.status(400).send(error);
       });
