@@ -20,8 +20,8 @@ const Home = () => {
     dispatch(listPanics());
   }, [dispatch]);
 
+  //Polling
   useInterval(() => {
-    console.log('panics')
     dispatch(listPanics());
   }, 1500);
 

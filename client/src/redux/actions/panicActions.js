@@ -11,7 +11,7 @@ export const getPanics = () => async (dispatch) => {
         },
       };
 
-      const { data } = await axios.get("/api/panic");
+      const { data } = await axios.get("/api/admin/panic");
 
       dispatch({
         type: actionTypes.GET_PANICS_SUCCESS,

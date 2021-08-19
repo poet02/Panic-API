@@ -1,6 +1,9 @@
-const User = require("../models").Admin;
+const Admin = require("../models").Admin;
 const { v4: uuidv4 } = require("uuid");
 const axios = require("axios");
+const { Op } = require("sequelize");
+const bcrypt = require("bcrypt");
+const jwtGenerator = require("../utils/jwtGenerator");
 
 module.exports = {
   async register(req, res) {
@@ -8,8 +11,8 @@ module.exports = {
       const admins = await Admin.findAll({
         where: {
           [Op.or]: [
-            { user_cell: req.body.cell },
-            { user_email: req.body.email },
+            { cell: req.body.cell },
+            { email: req.body.email },
           ],
         },
       });
@@ -39,7 +42,7 @@ module.exports = {
   },
 
   async login(req, res) {
-    const admin = await User.findOne({
+    const admin = await Admin.findOne({
       where: { cell: req.body.cell },
       });
     if (!admin) {
@@ -55,7 +58,7 @@ module.exports = {
       if (!validPassword) {
         return res.status(401).json("Invalid Credential");
       }
-      const jwtToken = jwtGenerator(admin, 'USER');
+      const jwtToken = jwtGenerator(admin, 'ADMIN');
       return res.status(200).send(jwtToken);;
   },
 
