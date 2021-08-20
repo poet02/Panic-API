@@ -143,7 +143,7 @@ module.exports = {
           .update({
             responder_id: req.body.responderId || panic.responder_id,
             client_responded_at: panic.client_responded_at || panic.updatedAt,
-            responder_completedAt_at: req.body.responderResolved
+            responder_completed_at: req.body.responderResolved
               ? panic.updatedAt
               : null,
           })

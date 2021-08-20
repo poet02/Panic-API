@@ -10,20 +10,17 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import { blue, green, red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import CallIcon from '@material-ui/icons/Call';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import PersonIcon from '@material-ui/icons/Person';
+
 import Moment from 'react-moment';
 import UserDetails from './UserDetails';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '2%'
+    margin: '2%',
+    marginBottom: '10px'
   },
   media: {
     height: 0,
@@ -41,6 +38,15 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500],
+  },
+  blue: {
+    color: blue[700],
+  },
+  green: {
+    color: green[700],
+  },
+  red: {
+    color: red[700],
   },
 }));
 
@@ -61,8 +67,23 @@ export default function PanicCard({ filterState, panic, onUpdateMap, selected })
 
   const handleUpdateGoogleMap = (panic) => onUpdateMap(panic);
 
+  let cardColor = 'red';
+  let responderCompleted = false;
 
-  
+  if (panic.responder) {
+    cardColor = 'blue'
+    if (panic.responder_completed_at) {
+      responderCompleted = true;
+
+    }
+  }
+
+  if (panic.user_helped_at && responderCompleted) {
+    cardColor = 'green'
+  }
+
+
+
   const time = (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
@@ -84,7 +105,7 @@ export default function PanicCard({ filterState, panic, onUpdateMap, selected })
   }
 
   return (
-    <Card style={{border: selectedPanicClass, cursor: 'pointer'}} className={classes.root} onClick={() => handleUpdateGoogleMap(panic)}>
+    <Card style={{ border: selectedPanicClass, cursor: 'pointer' }} className={classes.root + " " + classes[cardColor]} onClick={() => handleUpdateGoogleMap(panic)}>
       <CardHeader
         action={
           <IconButton aria-label="settings">
@@ -92,14 +113,25 @@ export default function PanicCard({ filterState, panic, onUpdateMap, selected })
           </IconButton>
         }
         title={time}
-        subheader={(<UserDetails name={panic.user.user_name} location={panic.panic_location} contact={panic.user.user_cell} />)}
+        subheader={
+          (
+            <UserDetails
+              resolved={panic.user_helped_at ? true : false}
+              name={panic.user.user_name}
+              location={panic.panic_location}
+              contact={panic.user.user_cell}
+            />
+          )
+        }
       />
       <CardContent style={{ fontSize: 'small', display: 'flex' }} color="textSecondary">
         {panic.responder ?
-            <UserDetails
-              name={responder.responder_name}
-              contact={responder.responder_cell}
-              location={responder.responder_location} />
+          <UserDetails
+            resolved={panic.responder_completed_at ? true : false}
+
+            name={responder.responder_name}
+            contact={responder.responder_cell}
+            location={responder.responder_location} />
           :
           <div style={{ fontSize: 'small', display: 'flex' }}>No Responder Assigned</div>}
       </CardContent>

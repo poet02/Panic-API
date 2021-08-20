@@ -7,15 +7,34 @@ import CallIcon from '@material-ui/icons/Call';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PersonIcon from '@material-ui/icons/Person';
 
+import { blue, green, red } from '@material-ui/core/colors';
 
+const useStyles = makeStyles((theme) => ({
 
-export default function UserDetails({ name, contact, location }) {
+  blue: {
+    color: blue[700],
+  },
+  green: {
+    color: green[700],
+  },
+  red: {
+    color: red[700],
+  },
+}));
+
+export default function UserDetails({ resolved, name, contact, location }) {
+  const classes = useStyles();
+
+  let userColor = '';
+  if (resolved) {
+    userColor = 'green' 
+  }
 
 
 
   return (
     <div>
-      <div style={{ display: 'flex' }}>
+      <div className={classes.root +" " + classes[userColor]} style={{ display: 'flex'}}>
         <PersonIcon fontSize='small'></PersonIcon>
         <Typography style={{ fontSize: '0.8em' }}>{name || 'Unknown User'}</Typography>
       </div>
