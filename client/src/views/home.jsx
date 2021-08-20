@@ -12,28 +12,40 @@ import SimpleMap from './../components/SimpleMap';
 
 const Home = () => {
   const dispatch = useDispatch();
+
+  const { panics } = useSelector((state) => state.getPanics);
+
   const [mapPanic, setMapPanic] = useState({});
   const handleUpdateMap = (panic) => {
     setMapPanic(panic);
   };
-  useEffect(() => {
+
+  let liveMapData = {};
+  if (panics && mapPanic) {
+    liveMapData = panics.find((panic) => {
+      return mapPanic.id === panic.id
+    })
+
+  }
+
+   useEffect(() => {
     dispatch(listPanics());
   }, [dispatch]);
 
   //Polling
   useInterval(() => {
     dispatch(listPanics());
-  }, 1500);
+  }, 4500);
 
   return (
     <>
       < div style={{ display: 'flex' }}>
         <div style={{ height: '100vh', width: '30%', overflowY: 'auto' }}>
-          <PanicList onUpdateMap={handleUpdateMap} selected={mapPanic.id}/>
+          <PanicList panics={panics} onUpdateMap={handleUpdateMap} selected={mapPanic.id} />
         </div>
         {/* TODO: if mobile hide */}
         <div style={{ height: '100vh', width: '70%', overflowY: 'auto' }}>
-          <SimpleMap panic={mapPanic} />
+          <SimpleMap panic={liveMapData} />
         </div>
       </div>
     </>

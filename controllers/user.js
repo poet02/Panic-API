@@ -54,7 +54,7 @@ module.exports = {
   async login(req, res) {
     const user = await User.findOne({
       where: { user_cell: req.body.cell },
-      });
+    });
     if (!user) {
       return res.status(401).send({
         message: "Invalid Credential",
@@ -65,11 +65,11 @@ module.exports = {
       .compare(req.body.password, user.user_password)
       .catch((error) => res.status(400).send(error));
 
-      if (!validPassword) {
-        return res.status(401).json("Invalid Credential");
-      }
-      const jwtToken = jwtGenerator(user, 'USER');
-      return res.status(200).send(jwtToken);;
+    if (!validPassword) {
+      return res.status(401).json("Invalid Credential");
+    }
+    const jwtToken = jwtGenerator(user, "USER");
+    return res.status(200).send(jwtToken);
   },
 
   async addPanic(req, res) {
@@ -102,9 +102,19 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  updatePanic(req, res) {
-    //TODO: add authentication middleware
+  async updatePanic(req, res) {
+    let formattedAddress = req.body.panicLocation.replace(/\s/g, "+");
 
+    let googleMapUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${formattedAddress}&key=AIzaSyDjSzLWcWKHO6F_6e9AjcticwLeDU39dS4`;
+    let googleLocation = {};
+    await axios
+      .get(googleMapUrl)
+      .then(function (response) {
+        googleLocation = response.data.results[0].geometry.location;
+      })
+      .catch(function (error) {
+        return res.status(400).send(error);
+      });
     return Panic.findByPk(req.body.panicId, {})
       .then((panic) => {
         if (!panic) {
@@ -120,11 +130,13 @@ module.exports = {
             message: "Unauthorized panic update",
           });
         }
+
         return panic
           .update({
             // user_ip: req.body.userIp || panic.user_ip,
+            panic_lat: googleLocation.lat || req.body.panic_lat,
+            panic_lng: googleLocation.lng || req.body.panic_lng,
             panic_location: req.body.panicLocation || panic.panic_location,
-            // panic_location: req.body.panicLocation || panic.panic_location,
             user_helped_at: req.body.userResolved ? panic.updatedAt : null,
           })
           .then(() => res.status(200).send(panic))

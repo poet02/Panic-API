@@ -7,9 +7,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const PanicList = ({ onUpdateMap, selected }) => {
+const PanicList = ({ panics, onUpdateMap, selected }) => {
 
-	const { panics } = useSelector((state) => state.getPanics);
 
 	const [filerState, setState] = React.useState({
 		checkedNoResponder: true,
